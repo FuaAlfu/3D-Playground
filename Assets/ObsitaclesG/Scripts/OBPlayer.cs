@@ -8,6 +8,10 @@ using UnityEngine;
 
 public class OBPlayer : MonoBehaviour
 {
+    [Header("props")]
+    [SerializeField]
+    private float xValue, yValue,zValue = 0.01f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +21,6 @@ public class OBPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0.01f, 0,0);
+        transform.Translate(xValue, yValue,zValue);
     }
 }
