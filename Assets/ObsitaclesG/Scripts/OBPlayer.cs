@@ -21,6 +21,8 @@ public class OBPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(xValue, yValue,zValue);
+        float xValue = Input.GetAxis("Horizontal");
+        float zValue = Input.GetAxis("Vertical");
+        transform.Translate(xValue, 0,zValue);
     }
 }
