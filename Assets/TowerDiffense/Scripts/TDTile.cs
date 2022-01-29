@@ -8,6 +8,10 @@ using UnityEngine;
 
 public class TDTile : MonoBehaviour
 {
+    /*
+     WAYPOINT
+     */
+
     // Start is called before the first frame update
     void Start()
     {
