@@ -12,6 +12,9 @@ public class OBPlayer : MonoBehaviour
     [SerializeField]
     private float xValue, yValue,zValue = 0.01f;
 
+    [SerializeField]
+    private float moveSpeed = 2.2f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +24,8 @@ public class OBPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xValue = Input.GetAxis("Horizontal");
-        float zValue = Input.GetAxis("Vertical");
+        float xValue = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        float zValue = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         transform.Translate(xValue, 0,zValue);
     }
 }
