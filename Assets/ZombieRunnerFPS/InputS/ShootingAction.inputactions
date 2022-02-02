@@ -1,0 +1,34 @@
+{
+    "name": "ShootingAction",
+    "maps": [
+        {
+            "name": "Weapon",
+            "id": "6ead1b9f-83b7-4241-af09-1aebad02dfee",
+            "actions": [
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "4b18ba27-55af-4967-ac6b-339711ad1090",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0dc6f5ff-9497-47cb-802e-f629786117e8",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

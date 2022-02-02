@@ -9,6 +9,10 @@ using UnityEngine.AI;
 /// </summary>
 public class ZREnemyAI : MonoBehaviour
 {
+    //--------------------(Audio)
+    [SerializeField]
+    AudioClip chaseSFX;
+    //--------------------
     [SerializeField]
     private Transform target;
 
@@ -19,10 +23,13 @@ public class ZREnemyAI : MonoBehaviour
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
 
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -62,6 +69,7 @@ public class ZREnemyAI : MonoBehaviour
     void ChaseTarget()
     {
         navMeshAgent.SetDestination(target.position);
+        audioSource.PlayOneShot(chaseSFX);
     }
 
     void AttackTarget()
