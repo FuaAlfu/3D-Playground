@@ -14,6 +14,9 @@ public class ZRWeapon : MonoBehaviour
     [SerializeField]
     float range = 100f;
 
+    [SerializeField]
+    private float healthHit = 50f;
+
    // public InputAction playerController;
     public ShootingAction shootingAction;
 
@@ -52,6 +55,23 @@ public class ZRWeapon : MonoBehaviour
        // playerController.
     }
 
+    private void Shoot()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range))
+        {
+            Debug.Log("hit.. " + hit.transform.name);
+            //TODO.. add some hit effect for visual players
+            EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
+            if (target == null) return;
+            target.TakeDamage(healthHit);
+        }
+        else
+        {
+            return;
+        }
+    }
+    //----------------------------------------(for testing)
     //private Action<InputAction.CallbackContext> Shoot()
     //{
     //    RaycastHit hit;
@@ -67,13 +87,6 @@ public class ZRWeapon : MonoBehaviour
     //    // {
     //    Debug.Log("hit.. " + hit.transform.name);
     //    //}
-    //}
-
-    //private void Shoot()
-    //{
-    //    RaycastHit hit;
-    //    Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range);
-    //    Debug.Log("hit.. " + hit.transform.name);
     //}
 
     //private void Shoot(ShootingAction.WeaponActions obj)
