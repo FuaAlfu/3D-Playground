@@ -12,15 +12,18 @@ public class TDTile : MonoBehaviour
      WAYPOINT
      */
 
-    // Start is called before the first frame update
-    void Start()
+    [field: SerializeField]
+    bool isPlaceable;
+
+     void OnMouseOver()
     {
-        
+        Debug.Log(transform.name);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDown()
     {
-        
+      //  if (Input.GetMouseButtonDown(0)) { }
+      if(isPlaceable)
+        Debug.Log(transform.name);
     }
 }
