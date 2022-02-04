@@ -1,14 +1,14 @@
 {
-    "name": "ShootingAction",
+    "name": "WeaponsControls",
     "maps": [
         {
-            "name": "Weapon",
-            "id": "6ead1b9f-83b7-4241-af09-1aebad02dfee",
+            "name": "WeaponFiring",
+            "id": "023f1bdd-5348-45aa-bfa9-64389830b5e7",
             "actions": [
                 {
                     "name": "Shoot",
                     "type": "Button",
-                    "id": "4b18ba27-55af-4967-ac6b-339711ad1090",
+                    "id": "a69e6299-b0f3-4066-b1d1-ff22b87948da",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -18,8 +18,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "0dc6f5ff-9497-47cb-802e-f629786117e8",
-                    "path": "<Joystick>/trigger",
+                    "id": "baaa9ebf-3554-4979-b335-1b6fd32e6bde",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

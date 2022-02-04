@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,31 +18,20 @@ public class ZRWeapon : MonoBehaviour
     [SerializeField]
     private float healthHit = 50f;
 
-   // public InputAction playerController;
-    public ShootingAction shootingAction;
+    [SerializeField]
+    private float fireRate = 5f;
+
+    WaitForSeconds rapidFireWait;
 
     private void Awake()
     {
-        shootingAction = new ShootingAction();
-    }
-
-    private void OnEnable()
-    {
-        //  playerController.Enable();
-        shootingAction.Enable();
-       // shootingAction.Weapon.Shoot.performed += Shoot();
-    }
-
-    private void OnDisable()
-    {
-       // shootingAction.Weapon.Shoot.performed -= Shoot();
-        shootingAction.Disable();
+        rapidFireWait = new WaitForSeconds(1 / fireRate);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -51,11 +41,19 @@ public class ZRWeapon : MonoBehaviour
         // {
         //  Shoot();
         //}
-
-       // playerController.
     }
 
-    private void Shoot()
+
+   public IEnumerator RapidFire()
+    {
+        while(true)
+        {
+            Shoot();
+            yield return rapidFireWait;
+        }
+    }
+
+    public void Shoot()
     {
         RaycastHit hit;
         if(Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range))
