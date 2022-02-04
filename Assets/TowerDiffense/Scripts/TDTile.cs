@@ -15,15 +15,22 @@ public class TDTile : MonoBehaviour
     [field: SerializeField]
     bool isPlaceable;
 
+    [SerializeField]
+    private GameObject prefabe;
+
      void OnMouseOver()
     {
         Debug.Log(transform.name);
     }
 
-    private void OnMouseDown()
+     void OnMouseDown()
     {
       //  if (Input.GetMouseButtonDown(0)) { }
       if(isPlaceable)
-        Debug.Log(transform.name);
+        {
+            Debug.Log(transform.name);
+            Instantiate(prefabe, transform.position, Quaternion.identity);
+            isPlaceable = false;  //prevent add more tower on a previous tower..
+        }
     }
 }
