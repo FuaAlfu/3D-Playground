@@ -11,6 +11,9 @@ public class ZRInputManager : MonoBehaviour
     [SerializeField]
     ZRWeapon zrWeapon;
 
+    [SerializeField]
+    ZRWeaponZoom weaponZoom;
+
     WeaponsControls weaponsControls;
     WeaponsControls.WeaponFiringActions fireAction;
 
@@ -26,6 +29,7 @@ public class ZRInputManager : MonoBehaviour
 
         //fireAction.[action].performed += contxt => do somthing
         fireAction.Shoot.performed += _ => zrWeapon.Shoot();
+        fireAction.Zoom.performed += _ => weaponZoom.Zooming();
         //fireAction.Shoot.performed += _ => StartFiring();
     }
 

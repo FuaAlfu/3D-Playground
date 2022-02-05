@@ -35,6 +35,15 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Button"",
+                    ""id"": ""e54d6de1-18eb-458d-b952-6c019eefcd92"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ada80abd-57cc-4fc7-8b17-ce33ca890e53"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
         // WeaponFiring
         m_WeaponFiring = asset.FindActionMap("WeaponFiring", throwIfNotFound: true);
         m_WeaponFiring_Shoot = m_WeaponFiring.FindAction("Shoot", throwIfNotFound: true);
+        m_WeaponFiring_Zoom = m_WeaponFiring.FindAction("Zoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -117,11 +138,13 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_WeaponFiring;
     private IWeaponFiringActions m_WeaponFiringActionsCallbackInterface;
     private readonly InputAction m_WeaponFiring_Shoot;
+    private readonly InputAction m_WeaponFiring_Zoom;
     public struct WeaponFiringActions
     {
         private @WeaponsControls m_Wrapper;
         public WeaponFiringActions(@WeaponsControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_WeaponFiring_Shoot;
+        public InputAction @Zoom => m_Wrapper.m_WeaponFiring_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_WeaponFiring; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -134,6 +157,9 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnShoot;
+                @Zoom.started -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnZoom;
+                @Zoom.performed -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnZoom;
+                @Zoom.canceled -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnZoom;
             }
             m_Wrapper.m_WeaponFiringActionsCallbackInterface = instance;
             if (instance != null)
@@ -141,6 +167,9 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
             }
         }
     }
@@ -148,5 +177,6 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
     public interface IWeaponFiringActions
     {
         void OnShoot(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
 }

@@ -19,6 +19,9 @@ public class ZREnemyAI : MonoBehaviour
     [SerializeField]
     private float chaseRange = 5f;
 
+    [SerializeField]
+    private float turnSpeed = 5f;
+
     NavMeshAgent navMeshAgent;
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
@@ -55,7 +58,8 @@ public class ZREnemyAI : MonoBehaviour
 
     private void EngageTarget()
     {
-        if(distanceToTarget >= navMeshAgent.stoppingDistance)
+        FaceTarget();
+        if (distanceToTarget >= navMeshAgent.stoppingDistance)
         {
             ChaseTarget();
         }
@@ -68,13 +72,28 @@ public class ZREnemyAI : MonoBehaviour
 
     void ChaseTarget()
     {
+        GetComponent<Animator>().SetBool("attack", false);
+        GetComponent<Animator>().SetTrigger("move");
         navMeshAgent.SetDestination(target.position);
-        audioSource.PlayOneShot(chaseSFX);
+        //audioSource.PlayOneShot(chaseSFX);
     }
 
     void AttackTarget()
     {
-        Debug.Log(name + "attacking" + target.name);
+        GetComponent<Animator>().SetBool("attack", true);
+      //  Debug.Log(name + "attacking" + target.name);
+    }
+
+    public void OnDamageTaken()
+    {
+        isProvoked = true;
+    }
+
+    private void FaceTarget()
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
     }
 
     void SetDestination()
