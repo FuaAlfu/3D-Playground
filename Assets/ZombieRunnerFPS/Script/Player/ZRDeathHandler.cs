@@ -18,8 +18,10 @@ public class ZRDeathHandler : MonoBehaviour
 
     public void HandleDeath()
     {
+        FindObjectOfType<ZRWeaponSwitcher>().enabled = false;
         gameOver.enabled = true;
         Time.timeScale = 0;
+        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

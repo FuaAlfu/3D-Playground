@@ -9,17 +9,11 @@ using UnityEngine.SceneManagement;
 
 public class ZRSceneLoader : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //void OnLevelWasLoaded(int level)
+    //{
+    //    if (level == 0)
+    //        print("done");
+    //}
 
     public void SceneLoader()
     {

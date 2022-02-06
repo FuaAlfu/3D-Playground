@@ -10,6 +10,16 @@ public class ZRAmmo : MonoBehaviour
     private int ammoAmount = 10;
 
     [SerializeField]
+    ZRAmmoSlot[] ammoSlots;
+
+    [System.Serializable]
+    private class ZRAmmoSlot
+    {
+        public ZRAmmoType ammoType;
+        public int ammoAmount;
+    }
+
+    [SerializeField]
     Text ammoText;
 
     [SerializeField]

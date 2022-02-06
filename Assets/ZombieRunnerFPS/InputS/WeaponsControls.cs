@@ -44,6 +44,15 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Switch"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd047dfe-284b-422f-bd3c-a4c2e00ec66c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bfa41b0b-f875-4904-bd0d-80a209f7831e"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Switch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
         m_WeaponFiring = asset.FindActionMap("WeaponFiring", throwIfNotFound: true);
         m_WeaponFiring_Shoot = m_WeaponFiring.FindAction("Shoot", throwIfNotFound: true);
         m_WeaponFiring_Zoom = m_WeaponFiring.FindAction("Zoom", throwIfNotFound: true);
+        m_WeaponFiring_Switch = m_WeaponFiring.FindAction("Switch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,12 +160,14 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
     private IWeaponFiringActions m_WeaponFiringActionsCallbackInterface;
     private readonly InputAction m_WeaponFiring_Shoot;
     private readonly InputAction m_WeaponFiring_Zoom;
+    private readonly InputAction m_WeaponFiring_Switch;
     public struct WeaponFiringActions
     {
         private @WeaponsControls m_Wrapper;
         public WeaponFiringActions(@WeaponsControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_WeaponFiring_Shoot;
         public InputAction @Zoom => m_Wrapper.m_WeaponFiring_Zoom;
+        public InputAction @Switch => m_Wrapper.m_WeaponFiring_Switch;
         public InputActionMap Get() { return m_Wrapper.m_WeaponFiring; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -160,6 +183,9 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
                 @Zoom.started -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnZoom;
+                @Switch.started -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnSwitch;
+                @Switch.performed -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnSwitch;
+                @Switch.canceled -= m_Wrapper.m_WeaponFiringActionsCallbackInterface.OnSwitch;
             }
             m_Wrapper.m_WeaponFiringActionsCallbackInterface = instance;
             if (instance != null)
@@ -170,6 +196,9 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @Switch.started += instance.OnSwitch;
+                @Switch.performed += instance.OnSwitch;
+                @Switch.canceled += instance.OnSwitch;
             }
         }
     }
@@ -178,5 +207,6 @@ public partial class @WeaponsControls : IInputActionCollection2, IDisposable
     {
         void OnShoot(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnSwitch(InputAction.CallbackContext context);
     }
 }
