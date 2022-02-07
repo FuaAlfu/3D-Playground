@@ -74,4 +74,9 @@ public class ZRInputManager : MonoBehaviour
             StopCoroutine(fireCoroutine);
         }
     }
+
+    public void PrintAmmoValues()
+    {
+
+    }
 }

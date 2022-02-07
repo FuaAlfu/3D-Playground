@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,16 +8,11 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     private float health = 100f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool isDead = false;
 
-    // Update is called once per frame
-    void Update()
+    public bool IsDead()
     {
-        
+        return isDead;
     }
 
     public void TakeDamage(float dmg)
@@ -25,7 +21,15 @@ public class EnemyHealth : MonoBehaviour
         health -= dmg;
         if(health <= 0)
         {
-            Destroy(this.gameObject); //for testing..
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        // Destroy(this.gameObject); //for testing..
+        if (isDead) return;
+        isDead = true;
+        GetComponent<Animator>().SetTrigger("die");
     }
 }

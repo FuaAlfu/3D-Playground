@@ -25,6 +25,9 @@ public class ZRWeapon : MonoBehaviour
     private Transform gunBox;
 
     [SerializeField]
+    ZRAmmoType ammoType;
+
+    [SerializeField]
     float range = 100f;
 
     [SerializeField]
@@ -67,13 +70,13 @@ public class ZRWeapon : MonoBehaviour
 
     public void Shoot()
     {
-        if(ammoSlot.GetCurrentAmmo() > 0)
+        if(ammoSlot.GetCurrentAmmo(ammoType) > 0)
         {
             //particle
             PlayParticle();
             ProcessRaycast();
             ProcessRaycastAgain();
-            ammoSlot.ReduceCurrentAmmo();
+            ammoSlot.ReduceCurrentAmmo(ammoType);
         }
     }
 
